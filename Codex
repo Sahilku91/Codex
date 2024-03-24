@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex Bypasser</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+ 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+ 
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #000; /* Dark black background */
+        color: #fff; /* White text */
+    }
+ 
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #fff;
+        text-align: center;
+    }
+ 
+    input[type="text"] {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #fff; /* White border */
+        border-radius: 5px;
+        outline: none; /* Remove default outline */
+    }
+ 
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+ 
+    button:hover {
+        background-color: #0056b3;
+    }
+ 
+    #response {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: left;
+        background-color: #333;
+        border-radius: 5px;
+    }
+ 
+    .logo-container {
+        margin-top: 20px;
+    }
+ 
+    .logo-container img {
+        width: 100px; /* Adjust the size of the logo */
+        height: auto;
+    }
+ 
+    .made-by-text {
+        color: #fff;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Codex Bypasser</h1>
+        <input type="text" id="tokenInput" placeholder="Enter your token" style="border: 2px solid #fff;">
+        <button onclick="fetchResponse()">Generate Key</button>
+        <div id="response" style="display: none;"></div>
+        <div class="logo-container">
+            <a href=" target="_blank"><img src="https://cdn.discordapp.com/attachments/1219867697559507018/1221394015530909746/Picsart_24-03-18_18-29-12-937.png?ex=66126ad1&is=65fff5d1&hm=511f1ba292a39ce597a62a0eaeffdf8e1c1e7c9db77aa6c21ad573d36d3f2c7b" alt="Made by IAMIAK" style="width: 100px;"></a>
+            <p class="made-by-text">MADE BY IAMIAK</p>
+        </div>
+    </div>
+ 
+    <script>
+        function fetchResponse() {
+            var tokenInput = document.getElementById('tokenInput');
+            var token = tokenInput.value.trim();
+            if (token !== '') {
+                var link = 'https://stickx.top/api-codex/?token=' + token;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var response = this.responseText;
+                        displayResponse(response);
+                    }
+                };
+                xhttp.open("GET", link, true);
+                xhttp.send();
+            } else {
+                alert('Please enter a valid token.');
+            }
+        }
+ 
+        function displayResponse(response) {
+            var responseDiv = document.getElementById('response');
+            responseDiv.style.display = 'block';
+            // Remove curly braces, quotes, colons, and specified words from the response
+            response = response.replace(/[{}"':]/g, '').replace(/\b(?:Your|Key)\b/gi, '');
+            responseDiv.innerHTML = response;
+        }
+    </script>
+</body>
+</html>
